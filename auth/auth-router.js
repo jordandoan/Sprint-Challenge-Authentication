@@ -6,6 +6,10 @@ const Users = require('./auth-model');
 
 const secret = "HELLO I AM NOT HERE";
 
+router.get('/', (req,res) => {
+  res.status(200).json({message: "home"})
+})
+
 router.post('/register', authBody, (req, res) => {
   const hash = bcrypt.hashSync(req.user.password, 15);
   req.user.password = hash;
@@ -27,6 +31,7 @@ router.post('/login', authBody, (req, res) => {
 });
 
 function authBody (req, res, next) {
+  console.log(req.body);
   const user = req.body;
   if (user) {
     if (user.password && user.username) {

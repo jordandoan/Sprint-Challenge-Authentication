@@ -2,17 +2,21 @@ db = require("../database/dbConfig");
 
 module.exports = {
   addUser,
-  findUser
+  findUser,
+  deleteAll
 }
 
 function addUser(user) {
   return db('users')
     .insert(user)
-    .first();
 }
 
 function findUser(username) {
   return db('users')
     .where({username})
     .first();
+}
+
+function deleteAll() {
+  return db('users').truncate()
 }
